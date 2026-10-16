@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Group the admin sidebar into collapsible workspace, mail, delivery, operations, and access sections; preserve per-role filtering and active-page highlighting, and link to the separate mailbox login.
+- Group the admin sidebar into collapsible workspace, mail, delivery, operations, and access sections; preserve per-role filtering and active-page highlighting, keep labels horizontal on narrow screens, and link to the separate mailbox login.
 - Replace mandatory TOTP enrollment with direct username/password login, 8-hour secure sessions, and password-only reauthentication for sensitive changes; upgrade existing password-authenticated pending sessions to the direct-login role.
 - Remove the MFA enrollment UI and endpoints, and update admin/session views to show password authentication.
 - Resolve client addresses from the TCP peer by default; accept one validated `X-Real-IP` only from explicitly configured trusted proxy CIDRs, and use the resolved address for login/setup limits and source-IP policy.

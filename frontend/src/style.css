@@ -19,6 +19,9 @@
 .sidebar nav .nav-item.selected{background:#26444a;color:#d4fbef}
 .sidebar nav .nav-item__icon{display:inline-flex;align-items:center;justify-content:center;width:17px;color:#78959e;font-size:14px}
 .sidebar nav .nav-item.selected .nav-item__icon{color:#7cdbc2}
+.sidebar nav .nav-group__toggle>.nav-group__label{display:block;width:auto;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidebar nav .nav-item>.nav-item__icon{flex:0 0 17px}
+.sidebar nav .nav-item>span:not(.nav-item__icon){display:block;width:auto;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sidebar-footer{display:flex;flex-direction:column;align-items:stretch;gap:12px}
 .mail-user-link{display:flex;align-items:center;gap:9px;padding:9px 12px;border:1px solid #31484f;border-radius:7px;color:#c1d6d8;text-decoration:none;font-size:11px}
 .mail-user-link:hover{background:#20383f;color:#fff}
