@@ -1,0 +1,4 @@
+# EXAMPLE ONLY, not enabled by installation. Validate with visudo -cf before manual installation.
+# The root-owned helper itself validates exactly two argv items and a fixed method/value schema.
+# Never grant generic systemctl, postsuper, postqueue, sh, bash, python or unrestricted sudo.
+vmail ALL=(root) NOPASSWD: /usr/local/libexec/astrogate-mail-helper

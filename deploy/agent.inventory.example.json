@@ -1,0 +1,19 @@
+{
+  "instance_id": "replace-node-instance-id",
+  "adapter": "inventory",
+  "bind": "127.0.0.1",
+  "port": 9089,
+  "state_root": "/var/lib/astrogate-agent",
+  "domains": ["example.test"],
+  "forward_domains": [],
+  "write_enabled": false,
+  "allow_helper": false,
+  "signing_key_file": "/etc/astrogate-agent/secrets/signing-key",
+  "tls_cert_file": "/etc/astrogate-agent/tls/server.pem",
+  "tls_key_file": "/etc/astrogate-agent/tls/server.key",
+  "tls_ca_file": "/etc/astrogate-agent/tls/ca.pem",
+  "client_cert_sha256": "REPLACE_WITH_GENERATED_CONTROL_CLIENT_CERT_SHA256",
+  "mail_hostname": null,
+  "probe_ip": null,
+  "max_ledger_jobs": 500000
+}

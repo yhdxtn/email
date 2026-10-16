@@ -1,0 +1,38 @@
+[Unit]
+Description=Astrogate Mail Agent (explicitly approved installation only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vmail
+Group=vmail
+UMask=0077
+ExecStart=/opt/astrogate-mail-agent/venv/bin/python -I -m agent.server --config /etc/astrogate-agent/config.json
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictRealtime=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ReadWritePaths=/var/lib/astrogate-agent
+# Only after clone acceptance, add the exact declared map/Maildir/backup directories in a reviewed drop-in.
+# Do not make /etc, /var or / writable globally. Default root helper is disabled.
+MemoryMax=256M
+TasksMax=64
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

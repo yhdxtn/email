@@ -1,0 +1,25 @@
+.env
+.env.*
+!.env.example
+secrets/
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+.pytest_cache/
+.local/
+*.log
+*.sqlite*
+*.pem
+*.p12
+*.key
+*.agbackup
+coverage/
+
+.venv/
+*.egg-info/
+*.pyc
+
+# Per-run validation output; retain only the human-readable deployment report
+validation/*
+!validation/REPORT.md

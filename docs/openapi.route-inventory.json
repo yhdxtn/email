@@ -1,0 +1,1414 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Astrogate Mail Admin — source route inventory, NOT full runtime contract",
+    "version": "0.1.0",
+    "description": "Generated from controller mapping annotations. Incomplete schemas; runtime validation not performed."
+  },
+  "x-contract-status": "SOURCE_INVENTORY_NOT_RUNTIME_VERIFIED",
+  "paths": {
+    "/api/v1/admins": {
+      "get": {
+        "operationId": "AdminController_0",
+        "tags": [
+          "AdminController"
+        ],
+        "summary": "GET /api/v1/admins",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "AdminController_1",
+        "tags": [
+          "AdminController"
+        ],
+        "summary": "POST /api/v1/admins",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/admins/{id}": {
+      "put": {
+        "operationId": "AdminController_2",
+        "tags": [
+          "AdminController"
+        ],
+        "summary": "PUT /api/v1/admins/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/setup/status": {
+      "get": {
+        "operationId": "AuthController_0",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "GET /api/v1/setup/status",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/setup/initialize": {
+      "post": {
+        "operationId": "AuthController_1",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "POST /api/v1/setup/initialize",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/csrf": {
+      "get": {
+        "operationId": "AuthController_2",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "GET /api/v1/auth/csrf",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_3",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "POST /api/v1/auth/login",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "operationId": "AuthController_4",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "GET /api/v1/auth/me",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reauth": {
+      "post": {
+        "operationId": "AuthController_5",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "POST /api/v1/auth/reauth",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_6",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "POST /api/v1/auth/logout",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sessions": {
+      "get": {
+        "operationId": "AuthController_7",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "GET /api/v1/auth/sessions",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sessions/{id}": {
+      "delete": {
+        "operationId": "AuthController_8",
+        "tags": [
+          "AuthController"
+        ],
+        "summary": "DELETE /api/v1/auth/sessions/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/overview": {
+      "get": {
+        "operationId": "ControlController_0",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/overview",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/nodes": {
+      "get": {
+        "operationId": "ControlController_1",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/nodes",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "ControlController_2",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/nodes",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/nodes/{id}/scan": {
+      "post": {
+        "operationId": "ControlController_3",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/nodes/{id}/scan",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/nodes/{id}/enable-management-plan": {
+      "post": {
+        "operationId": "ControlController_4",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/nodes/{id}/enable-management-plan",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks": {
+      "get": {
+        "operationId": "ControlController_5",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/tasks",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/tasks/{id}": {
+      "get": {
+        "operationId": "ControlController_6",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/tasks/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/plans/{id}/confirm": {
+      "post": {
+        "operationId": "ControlController_7",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/plans/{id}/confirm",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/settings": {
+      "get": {
+        "operationId": "ControlController_8",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/settings",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "put": {
+        "operationId": "ControlController_9",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "PUT /api/v1/settings",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/health/checks": {
+      "get": {
+        "operationId": "ControlController_10",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/health/checks",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/health/checks/run": {
+      "post": {
+        "operationId": "ControlController_11",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/health/checks/run",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/audit/events": {
+      "get": {
+        "operationId": "ControlController_12",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/audit/events",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/website-users": {
+      "get": {
+        "operationId": "ControlController_13",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/website-users",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/alerts": {
+      "get": {
+        "operationId": "ControlController_14",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "GET /api/v1/alerts",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/alerts/{id}/silence": {
+      "post": {
+        "operationId": "ControlController_15",
+        "tags": [
+          "ControlController"
+        ],
+        "summary": "POST /api/v1/alerts/{id}/silence",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/domains": {
+      "get": {
+        "operationId": "DnsController_0",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "GET /api/v1/domains",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "DnsController_1",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "POST /api/v1/domains",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/domains/{id}": {
+      "put": {
+        "operationId": "DnsController_2",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "PUT /api/v1/domains/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/domains/{id}/dns/provider": {
+      "put": {
+        "operationId": "DnsController_3",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "PUT /api/v1/domains/{id}/dns/provider",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/domains/{id}/dns/desired": {
+      "get": {
+        "operationId": "DnsController_4",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "GET /api/v1/domains/{id}/dns/desired",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/domains/{id}/dns/check": {
+      "post": {
+        "operationId": "DnsController_5",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "POST /api/v1/domains/{id}/dns/check",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/domains/{id}/dns/plan": {
+      "post": {
+        "operationId": "DnsController_6",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "POST /api/v1/domains/{id}/dns/plan",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/dns/plans": {
+      "get": {
+        "operationId": "DnsController_7",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "GET /api/v1/dns/plans",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/dns/plans/{id}": {
+      "get": {
+        "operationId": "DnsController_8",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "GET /api/v1/dns/plans/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/dns/plans/{id}/apply": {
+      "post": {
+        "operationId": "DnsController_9",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "POST /api/v1/dns/plans/{id}/apply",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/dns/plans/{id}/rollback": {
+      "post": {
+        "operationId": "DnsController_10",
+        "tags": [
+          "DnsController"
+        ],
+        "summary": "POST /api/v1/dns/plans/{id}/rollback",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/livez": {
+      "get": {
+        "operationId": "LivenessController_0",
+        "tags": [
+          "LivenessController"
+        ],
+        "summary": "GET /livez",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/mailboxes": {
+      "get": {
+        "operationId": "MailboxController_0",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "GET /api/v1/mailboxes",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "MailboxController_1",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "POST /api/v1/mailboxes",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/mailboxes/{id}/{action}": {
+      "post": {
+        "operationId": "MailboxController_2",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "POST /api/v1/mailboxes/{id}/{action}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/mailboxes/{id}/delete-plan": {
+      "post": {
+        "operationId": "MailboxController_3",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "POST /api/v1/mailboxes/{id}/delete-plan",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/aliases": {
+      "get": {
+        "operationId": "MailboxController_4",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "GET /api/v1/aliases",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "MailboxController_5",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "POST /api/v1/aliases",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/aliases/{id}": {
+      "delete": {
+        "operationId": "MailboxController_6",
+        "tags": [
+          "MailboxController"
+        ],
+        "summary": "DELETE /api/v1/aliases/{id}",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/mail/test-send": {
+      "post": {
+        "operationId": "OperationsController_0",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/mail/test-send",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/mail/sends": {
+      "get": {
+        "operationId": "OperationsController_1",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "GET /api/v1/mail/sends",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/mail/sends/{id}/observation": {
+      "post": {
+        "operationId": "OperationsController_2",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/mail/sends/{id}/observation",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/mail/queue": {
+      "get": {
+        "operationId": "OperationsController_3",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "GET /api/v1/mail/queue",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/mail/queue/{queueId}/retry": {
+      "post": {
+        "operationId": "OperationsController_4",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/mail/queue/{queueId}/retry",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "queueId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/mail/queue/{queueId}/delete-plan": {
+      "post": {
+        "operationId": "OperationsController_5",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/mail/queue/{queueId}/delete-plan",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "queueId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/backups": {
+      "get": {
+        "operationId": "OperationsController_6",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "GET /api/v1/backups",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      },
+      "post": {
+        "operationId": "OperationsController_7",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/backups",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/backups/{id}/verify": {
+      "post": {
+        "operationId": "OperationsController_8",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/backups/{id}/verify",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/backups/{id}/restore-drill": {
+      "post": {
+        "operationId": "OperationsController_9",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/backups/{id}/restore-drill",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/restore-drills": {
+      "get": {
+        "operationId": "OperationsController_10",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "GET /api/v1/restore-drills",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        }
+      }
+    },
+    "/api/v1/nodes/{id}/import-mailboxes": {
+      "post": {
+        "operationId": "OperationsController_11",
+        "tags": [
+          "OperationsController"
+        ],
+        "summary": "POST /api/v1/nodes/{id}/import-mailboxes",
+        "description": "Source route inventory only. Request/response schemas and statuses require the actual generated runtime OpenAPI. See API.md.",
+        "security": [
+          {
+            "adminCookie": []
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Runtime response; validate against generated contract after build."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "adminCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Host-AGSESSION"
+      }
+    }
+  }
+}

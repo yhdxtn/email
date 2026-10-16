@@ -1,0 +1,13 @@
+<script setup lang="ts">
+import { nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { api, idempotencyKey } from '../api';
+import type { Row } from '../types';
+const props=defineProps<{plan:Row;confirm?:(confirmation:string,key:string)=>Promise<unknown>;onDone?:(result:unknown)=>void}>();
+const emit=defineEmits<{close:[]}>();
+const element=ref<HTMLDialogElement>(),confirmation=ref(''),password=ref(''),error=ref(''),busy=ref(false),reauthenticated=ref(false);
+const requestKey=idempotencyKey();const previous=document.activeElement as HTMLElement|null;
+onMounted(async()=>{await nextTick();element.value?.showModal();});onUnmounted(()=>previous?.focus());
+async function reauth(){busy.value=true;error.value='';try{await api('/auth/reauth','POST',{password:password.value});reauthenticated.value=true;}catch(e){error.value=e instanceof Error?e.message:'重新认证失败';}finally{password.value='';busy.value=false;}}
+async function apply(){if(confirmation.value!==props.plan.confirmation)return;busy.value=true;error.value='';try{const result=props.confirm?await props.confirm(confirmation.value,requestKey):await api(`/plans/${props.plan.id}/confirm`,'POST',{confirmation:confirmation.value},requestKey);props.onDone?.(result);emit('close');}catch(e){error.value=e instanceof Error?e.message:'提交失败';}finally{busy.value=false;}}
+</script>
+<template><dialog ref="element" class="modal large" aria-labelledby="preview-title" @cancel.prevent="!busy&&emit('close')"><div class="dialog-heading"><div><small>预览 → 密码验证 → 明确确认</small><h2 id="preview-title">变更确认</h2></div><button class="icon-button" aria-label="关闭" :disabled="busy" @click="emit('close')">×</button></div><div class="notice warning">请核对下方影响范围。排队只表示已受理；结果以任务记录为准。未知结果不要盲目重试。</div><pre class="json-preview">{{JSON.stringify(plan.preview??plan,null,2)}}</pre><form class="reauth-box" @submit.prevent="reauth"><h3>重新认证</h3><p class="muted">此操作需要重新输入管理员密码。</p><label>管理员密码<input v-model="password" type="password" autocomplete="current-password" required :disabled="busy"></label><button type="submit" class="secondary" :disabled="busy">{{reauthenticated?'已认证，可再次验证':'验证身份'}}</button></form><form @submit.prevent="apply"><label>输入确认文字：<code>{{plan.confirmation}}</code><input v-model="confirmation" autocomplete="off" :spellcheck="false" required :disabled="busy"></label><p v-if="error" class="notice danger" role="alert">{{error}}</p><footer class="dialog-footer"><button type="button" class="secondary" :disabled="busy" @click="emit('close')">取消</button><button type="submit" :disabled="busy||!reauthenticated||confirmation!==plan.confirmation">{{busy?'正在执行…':'确认执行'}}</button></footer></form></dialog></template>

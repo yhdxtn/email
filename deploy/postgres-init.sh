@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+# This script runs only when PostgreSQL creates a NEW empty data volume.
+APP_PASSWORD=$(cat /run/astrogate-init/database-password)
+MIGRATION_PASSWORD=$(cat /run/astrogate-init/migration-password)
+export APP_PASSWORD MIGRATION_PASSWORD
+psql --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" --set ON_ERROR_STOP=1 --set APP_PASSWORD="$APP_PASSWORD" --set MIGRATION_PASSWORD="$MIGRATION_PASSWORD" <<'SQL'
+CREATE ROLE astrogate_migrator LOGIN PASSWORD :'MIGRATION_PASSWORD' NOSUPERUSER NOCREATEDB NOCREATEROLE;
+CREATE ROLE astrogate_app LOGIN PASSWORD :'APP_PASSWORD' NOSUPERUSER NOCREATEDB NOCREATEROLE;
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+GRANT USAGE, CREATE ON SCHEMA public TO astrogate_migrator;
+GRANT USAGE ON SCHEMA public TO astrogate_app;
+ALTER DEFAULT PRIVILEGES FOR ROLE astrogate_migrator IN SCHEMA public GRANT SELECT,INSERT,UPDATE,DELETE ON TABLES TO astrogate_app;
+ALTER DEFAULT PRIVILEGES FOR ROLE astrogate_migrator IN SCHEMA public GRANT USAGE,SELECT ON SEQUENCES TO astrogate_app;
+SQL
