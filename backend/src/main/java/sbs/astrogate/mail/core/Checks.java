@@ -47,8 +47,14 @@ public final class Checks {
         return value;
     }
     public static String password(String value) {
-        if (value == null || value.length() < 14 || value.getBytes(StandardCharsets.UTF_8).length > 72 || value.chars().anyMatch(Character::isISOControl))
-            throw new IllegalArgumentException("密码需至少 14 个字符，且 UTF-8 长度不超过 72 字节");
+        return validatePassword(value, 14, "密码需至少 14 个字符，且 UTF-8 长度不超过 72 字节");
+    }
+    public static String adminPassword(String value) {
+        return validatePassword(value, 9, "管理员密码需至少 9 个字符，且 UTF-8 长度不超过 72 字节");
+    }
+    private static String validatePassword(String value, int minimumLength, String message) {
+        if (value == null || value.length() < minimumLength || value.getBytes(StandardCharsets.UTF_8).length > 72 || value.chars().anyMatch(Character::isISOControl))
+            throw new IllegalArgumentException(message);
         return value;
     }
     public static String uuid(String value) {

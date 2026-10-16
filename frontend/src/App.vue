@@ -53,9 +53,9 @@ const canMail=computed(()=>may('Owner','MailAdmin')),canDns=computed(()=>may('Ow
 const nodeOptions=computed(()=>nodes.value.map(row=>({value:row.id,label:row.name+(row.readonly?' · 只读':'')})));
 const domainOptions=computed(()=>domains.value.map(row=>({value:row.id,label:row.name})));
 const text=(key:string,labelText:string,value='',required=true):Field=>({key,label:labelText,type:'text',required,value});
-const password=(key='password',labelText='密码（14–72 字节）'):Field=>({key,label:labelText,type:'password',min:14,max:72,required:true});
+const password=(key='password',labelText='密码（14–72 字节）',min=14):Field=>({key,label:labelText,type:'password',min,max:72,required:true});
 const selector=(key:string,labelText:string,options:{value:string;label:string}[],value=''):Field=>({key,label:labelText,type:'select',required:true,options,value});
-const freshFields=():Field[]=>[password('__password','当前管理员密码')];
+const freshFields=():Field[]=>[password('__password','当前管理员密码',9)];
 async function fresh(values:Row){await api('/auth/reauth','POST',{password:values.__password});delete values.__password;}
 function explain(error:unknown){problem.value=error instanceof ApiFailure?`${error.message} [${error.code}]${error.requestId?' · 请求 '+error.requestId:''}`:error instanceof Error?error.message:'操作失败';}
 async function perform(work:()=>Promise<unknown>,success='已提交，请检查任务或状态。'){
@@ -117,7 +117,7 @@ async function previewMail(){await perform(async()=>{if(attachments.value.length
 function observe(row:Row){openForm('记录人工投递观察',[selector('state','实际观察到的状态',[{value:'unconfirmed',label:'尚未确认'},{value:'inbox_seen',label:'在收件箱看到'},{value:'spam_seen',label:'在垃圾箱看到'},{value:'reply_received',label:'收到外部回信'}],row.recipient_confirmation)],v=>api(`/mail/sends/${row.id}/observation`,'POST',v),'这是管理员的人工记录，不是系统读取收件人邮箱的结果。');}
 function settingsForm(){openForm('组织设置',[text('organization','组织名称',data.value.settings?.organization||''),text('timezone','时区',data.value.settings?.timezone||'Asia/Shanghai'),{...text('alertRecipient','计划告警收件人',data.value.settings?.alertRecipient||'',false),type:'email'}],v=>api('/settings','PUT',v),'本版本只有站内告警。填写地址不会启用尚未实现的邮件/Webhook 告警。网络目标、SMTP 密钥和备份位置只在部署文件中配置。');}
 const roles=['Owner','MailAdmin','DnsAdmin','Operator','Auditor','WebsiteUserAdmin'].map(value=>({value,label:value}));
-function adminForm(row?:Row){const fields:Field[]=row?[selector('role','角色',roles,row.role),{key:'active',label:'启用账号',type:'checkbox',value:row.active},text('confirmation',`输入 UPDATE ${row.id}`)]:[text('username','管理员用户名'),password(),selector('role','角色',roles)];openForm(row?'修改管理员权限':'新增管理员',[...fields,...freshFields()],async v=>{await fresh(v);return api(row?`/admins/${row.id}`:'/admins',row?'PUT':'POST',v);},'修改角色或停用会吊销相关会话。管理员使用自己的用户名和密码登录。');}
+function adminForm(row?:Row){const fields:Field[]=row?[selector('role','角色',roles,row.role),{key:'active',label:'启用账号',type:'checkbox',value:row.active},text('confirmation',`输入 UPDATE ${row.id}`)]:[text('username','管理员用户名'),password('password','管理员密码（9–72 字节）',9),selector('role','角色',roles)];openForm(row?'修改管理员权限':'新增管理员',[...fields,...freshFields()],async v=>{await fresh(v);return api(row?`/admins/${row.id}`:'/admins',row?'PUT':'POST',v);},'修改角色或停用会吊销相关会话。管理员使用自己的用户名和密码登录。');}
 function reauthenticate(){openForm('重新认证',freshFields(),fresh,'高风险操作要求在最近 5 分钟内重新输入管理员密码，并在预览弹窗中确认。');}
 async function copyRecords(){await perform(async()=>{await navigator.clipboard.writeText(dnsRecords.value.map(r=>`${r.name}\t${r.ttl}\tIN\t${r.type}\t${r.type==='MX'?`${r.priority} `:''}${r.content}`).join('\n'));},'DNS 记录已复制。');}
 function exportAudit(){const blob=new Blob([JSON.stringify(rows.value,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='astrogate-audit-current-page.json';anchor.click();URL.revokeObjectURL(url);notice.value='已导出当前页，不包含数据库中的全部审计历史。';}

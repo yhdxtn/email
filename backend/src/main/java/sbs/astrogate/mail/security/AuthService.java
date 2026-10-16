@@ -25,7 +25,7 @@ public class AuthService {
         var row=s.one("SELECT initialized FROM system_setup WHERE id=1 FOR UPDATE");
         if(Boolean.TRUE.equals(row.get("initialized")))throw fail(409,"SETUP_CLOSED","初始化入口已经关闭");
         if(!Crypto.equal(Config.secret("APP_SETUP_TOKEN"),token))throw fail(403,"SETUP_TOKEN_INVALID","初始化凭据无效");
-        username(username);Checks.password(password);UUID id=UUID.randomUUID();
+        username(username);Checks.adminPassword(password);UUID id=UUID.randomUUID();
         s.db.update("INSERT INTO admin_user(id,username,password_hash,role) VALUES(?,?,?,'Owner')",id,username,passwords.encode(password));
         s.db.update("UPDATE system_setup SET initialized=true WHERE id=1");
         audit.add(username,"setup.initialize",id.toString(),"success",Map.of("role","Owner"));

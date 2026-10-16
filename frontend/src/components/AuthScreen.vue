@@ -53,7 +53,7 @@ async function submit(){
       <form v-if="stage!=='unavailable'&&stage!=='loading'" @submit.prevent="submit">
         <label v-if="stage==='setup'">一次性初始化令牌<input v-model="token" type="password" required autocomplete="off"></label>
         <label>管理员用户名<input v-model="username" required autocomplete="username" minlength="3" maxlength="64" pattern="[a-zA-Z0-9][a-zA-Z0-9_.-]{2,63}"></label>
-        <label>管理员密码<input v-model="password" type="password" required :minlength="stage==='setup'?14:undefined" maxlength="72" :autocomplete="stage==='setup'?'new-password':'current-password'"></label>
+        <label>管理员密码<input v-model="password" type="password" required :minlength="stage==='setup'?9:undefined" maxlength="72" :autocomplete="stage==='setup'?'new-password':'current-password'"></label>
         <p v-if="error" role="alert" class="notice danger">{{error}}</p>
         <button class="full-width" type="submit" :disabled="busy">{{busy?'正在验证…':stage==='setup'?'创建唯一初始管理员':'登录并进入'}}</button>
       </form>

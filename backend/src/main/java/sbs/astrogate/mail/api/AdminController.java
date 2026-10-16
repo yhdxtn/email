@@ -28,7 +28,7 @@ public class AdminController {
     @GetMapping public List<Map<String,Object>> list(){return s.db.queryForList("SELECT id,username,role,active,created_at FROM admin_user ORDER BY created_at LIMIT 100");}
     @PostMapping @Transactional public Map<String,Object> create(@Valid @RequestBody Create body){
         auth.requireFresh();if(!ROLES.contains(body.role()))throw new IllegalArgumentException("Invalid role");UUID id=UUID.randomUUID();
-        s.db.update("INSERT INTO admin_user(id,username,password_hash,role) VALUES(?,?,?,?)",id,AuthService.username(body.username()),passwords.encode(Checks.password(body.password())),body.role());
+        s.db.update("INSERT INTO admin_user(id,username,password_hash,role) VALUES(?,?,?,?)",id,AuthService.username(body.username()),passwords.encode(Checks.adminPassword(body.password())),body.role());
         audit.add(Actor.current().username(),"admin.create",id.toString(),"success",Map.of("role",body.role()));return Map.of("id",id,"loginRequired",true);
     }
     @PutMapping("/{id}") @Transactional public Map<String,Object> update(@PathVariable UUID id,@Valid @RequestBody Update body){

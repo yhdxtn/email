@@ -13,6 +13,13 @@ import AuthScreen from '../src/components/AuthScreen.vue';
 afterEach(()=>vi.clearAllMocks());
 
 describe('Admin authentication availability states',()=>{
+  it('allows the configured 9-character minimum when creating the first administrator',async()=>{
+    vi.mocked(refreshCsrf).mockResolvedValue(undefined);
+    vi.mocked(api).mockResolvedValueOnce({needsSetup:true});
+    const wrapper=mount(AuthScreen);await flushPromises();
+    expect(wrapper.find('input[autocomplete="new-password"]').attributes('minlength')).toBe('9');
+  });
+
   it('shows login only when the backend confirms there is no active session',async()=>{
     vi.mocked(refreshCsrf).mockResolvedValue(undefined);
     vi.mocked(api).mockResolvedValueOnce({needsSetup:false}).mockRejectedValueOnce(new ApiFailure('AUTH_REQUIRED','请先登录',401));
