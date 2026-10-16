@@ -14,25 +14,39 @@ const form=shallowRef<{title:string;description?:string;fields:Field[];submit:(v
 const preview=shallowRef<{plan:Row;confirm?:(confirmation:string,key:string)=>Promise<unknown>}|null>(null);
 const attachments=ref<File[]>([]);
 const mail=ref({from:'',to:'',subject:'',body:'',html:false});
-const nav:{id:Section;label:string;icon:string;roles:string[]}[]=[
- {id:'overview',label:'系统概览',icon:'◈',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']},
- {id:'mailboxes',label:'邮箱账户',icon:'✉',roles:['Owner','MailAdmin','Operator','Auditor']},
- {id:'aliases',label:'别名与转发',icon:'↗',roles:['Owner','MailAdmin','Operator','Auditor']},
- {id:'domains',label:'域名与 DNS',icon:'◎',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']},
- {id:'sending',label:'测试邮件',icon:'➤',roles:['Owner','MailAdmin','Auditor']},
- {id:'queue',label:'投递队列',icon:'≋',roles:['Owner','MailAdmin','Operator','Auditor']},
- {id:'nodes',label:'邮件节点',icon:'▣',roles:['Owner','MailAdmin','Operator','Auditor']},
- {id:'health',label:'健康与告警',icon:'⌁',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']},
- {id:'backups',label:'备份与演练',icon:'◷',roles:['Owner','Operator','Auditor']},
- {id:'tasks',label:'任务记录',icon:'☷',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']},
- {id:'audit',label:'操作审计',icon:'▤',roles:['Owner','Auditor']},
- {id:'website',label:'网站用户',icon:'♙',roles:['Owner','WebsiteUserAdmin','Auditor']},
- {id:'admins',label:'管理员权限',icon:'⌘',roles:['Owner']},
- {id:'settings',label:'系统设置',icon:'⚙',roles:['Owner','Operator','Auditor']},
- {id:'sessions',label:'我的会话',icon:'⏣',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor','WebsiteUserAdmin']}
+type NavItem={id:Section;label:string;icon:string;roles:string[]};
+const navGroups:{id:string;label:string;icon:string;items:NavItem[]}[]=[
+ {id:'workspace',label:'工作台',icon:'◈',items:[{id:'overview',label:'系统概览',icon:'◈',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']}]},
+ {id:'mail',label:'邮箱管理',icon:'✉',items:[
+  {id:'mailboxes',label:'邮箱账户',icon:'✉',roles:['Owner','MailAdmin','Operator','Auditor']},
+  {id:'aliases',label:'别名与转发',icon:'↗',roles:['Owner','MailAdmin','Operator','Auditor']},
+  {id:'domains',label:'域名与 DNS',icon:'◎',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']}
+ ]},
+ {id:'delivery',label:'投递与节点',icon:'➤',items:[
+  {id:'sending',label:'测试邮件',icon:'➤',roles:['Owner','MailAdmin','Auditor']},
+  {id:'queue',label:'投递队列',icon:'≋',roles:['Owner','MailAdmin','Operator','Auditor']},
+  {id:'nodes',label:'邮件节点',icon:'▣',roles:['Owner','MailAdmin','Operator','Auditor']}
+ ]},
+ {id:'operations',label:'监控与恢复',icon:'⌁',items:[
+  {id:'health',label:'健康与告警',icon:'⌁',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']},
+  {id:'backups',label:'备份与演练',icon:'◷',roles:['Owner','Operator','Auditor']},
+  {id:'tasks',label:'任务记录',icon:'☷',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor']}
+ ]},
+ {id:'access',label:'账户与系统',icon:'⌘',items:[
+  {id:'website',label:'网站用户',icon:'♙',roles:['Owner','WebsiteUserAdmin','Auditor']},
+  {id:'admins',label:'管理员权限',icon:'⌘',roles:['Owner']},
+  {id:'sessions',label:'我的会话',icon:'⏣',roles:['Owner','MailAdmin','DnsAdmin','Operator','Auditor','WebsiteUserAdmin']},
+  {id:'audit',label:'操作审计',icon:'▤',roles:['Owner','Auditor']},
+  {id:'settings',label:'系统设置',icon:'⚙',roles:['Owner','Operator','Auditor']}
+ ]}
 ];
-const visibleNav=computed(()=>nav.filter(n=>n.roles.includes(user.value?.role)));
-const title=computed(()=>nav.find(n=>n.id===section.value)?.label||'控制台');
+const visibleNavGroups=computed(()=>navGroups.map(group=>({...group,items:group.items.filter(item=>item.roles.includes(user.value?.role||''))})).filter(group=>group.items.length>0));
+const navItems=computed(()=>visibleNavGroups.value.flatMap(group=>group.items));
+const expandedGroups=ref(new Set(['workspace','mail','delivery','operations','access']));
+const activeGroupId=computed(()=>visibleNavGroups.value.find(group=>group.items.some(item=>item.id===section.value))?.id);
+const groupOpen=(id:string)=>expandedGroups.value.has(id);
+function toggleGroup(id:string){const next=new Set(expandedGroups.value);next.has(id)?next.delete(id):next.add(id);expandedGroups.value=next;}
+const title=computed(()=>navItems.value.find(item=>item.id===section.value)?.label||'控制台');
 const filtered=computed(()=>rows.value.filter(row=>JSON.stringify(row).toLowerCase().includes(query.value.toLowerCase())));
 const may=(...roles:string[])=>roles.includes(user.value?.role||'');
 const canMail=computed(()=>may('Owner','MailAdmin')),canDns=computed(()=>may('Owner','DnsAdmin'));
@@ -72,7 +86,7 @@ async function load(){
     lastRefresh.value=new Date().toLocaleTimeString('zh-CN',{hour12:false});
   }catch(error){explain(error);}finally{loading.value=false;}
 }
-watch(section,()=>{query.value='';inspected.value=null;rows.value=[];data.value={};mobileMenu.value=false;void load();});
+watch(section,()=>{if(activeGroupId.value&&activeGroupId.value!=='workspace'&&!expandedGroups.value.has(activeGroupId.value)){expandedGroups.value=new Set([...expandedGroups.value,activeGroupId.value]);}query.value='';inspected.value=null;rows.value=[];data.value={};mobileMenu.value=false;void load();});
 async function desired(){if(selectedDomain.value){const result=await api<Row>(`/domains/${selectedDomain.value}/dns/desired`);dnsRecords.value=result.records;}}
 function newNode(){openForm('注册邮件节点',[text('name','节点名称'),text('instanceId','部署中绑定的实例 ID')],v=>api('/nodes','POST',v),'这里只登记连接，不安装、重装或改写邮件服务。Agent 连接地址与密钥只能在部署机配置。');}
 function domainFields(row:Row={}):Field[]{return [text('name','邮件域名',row.name||''),text('mailHost','专用邮件主机名',row.mail_host||''),text('publicIpv4','邮件服务器 IPv4',row.public_ipv4||''),text('registrar','域名注册商（不等于 DNS 托管商）',row.registrar||'',false),selector('nodeId','邮件节点',nodeOptions.value,row.node_id||''),text('dkimSelector','DKIM selector',row.dkim_selector||'mail'),{key:'dkimPublic',label:'DKIM 公钥 TXT（不能粘贴私钥）',type:'textarea',value:row.dkim_public||'',max:8192},text('spf','SPF 期望值',row.spf||'v=spf1 mx -all'),text('dmarc','DMARC 期望值',row.dmarc||'v=DMARC1; p=none;'),{key:'ttl',label:'TTL（秒）',type:'number',min:60,max:86400,value:row.ttl||300,required:true}];}
@@ -128,7 +142,7 @@ const columns=computed(()=>{
 <template>
   <AuthScreen v-if="!user" @ready="ready"/>
   <div v-else class="workspace">
-    <aside :class="['sidebar',{expanded:mobileMenu}]"><a class="brand" href="#overview" @click.prevent="section=visibleNav[0].id"><span class="brand-mark">a<span>✦</span></span><span>Astrogate<small>MAIL ADMIN</small></span></a><div class="workspace-label">管理工作台 <span>SELF-HOSTED</span></div><nav aria-label="主导航"><button v-for="item in visibleNav" :key="item.id" :class="{selected:section===item.id}" :aria-current="section===item.id?'page':undefined" @click="section=item.id"><span aria-hidden="true">{{item.icon}}</span>{{item.label}}<i v-if="section===item.id"/></button></nav><div class="sidebar-footer"><span class="status-dot"/><div>工程交付版<small>0.1.0 · 未完成生产验收</small></div></div></aside>
+    <aside :class="['sidebar',{expanded:mobileMenu}]"><a class="brand" href="#overview" @click.prevent="section=navItems[0]?.id||'overview'"><span class="brand-mark">a<span>✦</span></span><span>Astrogate<small>MAIL ADMIN</small></span></a><div class="workspace-label">管理工作台 <span>SELF-HOSTED</span></div><nav aria-label="主导航"><section v-for="group in visibleNavGroups" :key="group.id" class="nav-group"><button type="button" class="nav-group__toggle" :class="{'has-current':activeGroupId===group.id}" :aria-expanded="groupOpen(group.id)" :aria-controls="'nav-items-'+group.id" @click="toggleGroup(group.id)"><span class="nav-group__icon" aria-hidden="true">{{group.icon}}</span><span class="nav-group__label">{{group.label}}</span><span class="nav-group__chevron" :class="{'is-open':groupOpen(group.id)}" aria-hidden="true">⌄</span></button><div v-if="groupOpen(group.id)" :id="'nav-items-'+group.id" class="nav-group__items"><button v-for="item in group.items" :key="item.id" type="button" class="nav-item" :class="{'selected':section===item.id}" :aria-current="section===item.id?'page':undefined" @click="section=item.id"><span class="nav-item__icon" aria-hidden="true">{{item.icon}}</span><span>{{item.label}}</span><i v-if="section===item.id"/></button></div></section></nav><div class="sidebar-footer"><a class="mail-user-link" href="https://mail.astrogate.sbs/" target="_blank" rel="noopener noreferrer">✉ <span>普通邮箱用户登录</span><span aria-hidden="true">↗</span></a><div class="sidebar-build"><span class="status-dot"/><div>工程交付版<small>0.1.0 · 未完成生产验收</small></div></div></div></aside>
     <div class="main-shell"><header class="topbar"><button class="mobile-toggle secondary" aria-label="切换导航" @click="mobileMenu=!mobileMenu">☰</button><div class="breadcrumb">工作台 <span>/</span> {{title}}</div><div class="user-controls"><button class="quiet" @click="reauthenticate">重新认证</button><span class="user-avatar">{{user.username?.slice(0,1).toUpperCase()}}</span><span class="user-name">{{user.username}}<small>{{user.role}}</small></span><button class="quiet" @click="logout">退出</button></div></header>
       <main class="content"><div class="page-heading"><div><small class="eyebrow">ASTROGATE CONTROL PLANE</small><h1>{{title}}</h1><p class="muted">{{section==='overview'?'从真实检查开始，掌握邮件服务的每一步。':'所有列表连接真实 API。未采集的数据明确显示为未知。'}}</p></div><div class="page-actions"><small v-if="lastRefresh" class="muted">更新于 {{lastRefresh}}</small><button class="secondary" :disabled="loading" @click="load">{{loading?'读取中…':'↻ 刷新'}}</button></div></div>
       <div class="release-strip"><span>尚未通过完整生产验收</span>请先在隔离环境完成构建、数据库初始化和现有邮件节点适配验证。<button class="quiet" @click="section='tasks'">查看任务 →</button></div>

@@ -32,3 +32,9 @@
 ## 其他未完成事项
 
 网站用户连接器、DNS/SMTP provider 实测、完整灾备与恢复、管理员离线密码恢复、邮件发送与退信监测、证书自动续期和全量生产安全验收仍待实现或验证。逐项范围见 `docs/ACCEPTANCE.md`、`docs/THREAT-MODEL.md` 与 `docs/OPERATIONS.md`。
+
+## 2026-10-16 侧边栏更新
+
+管理员侧边菜单已按“工作台、邮箱管理、投递与节点、监控与恢复、账户与系统”分组，支持折叠/展开、当前页面高亮及按管理员角色过滤；菜单在窄屏下保留滚动导航。管理员登录页和控制台侧边栏提供独立的普通邮箱用户入口。邮箱用户仍在 `https://mail.astrogate.sbs/` 使用完整邮箱地址和邮箱密码；邮箱账号不等同于后台管理员。
+
+前端 Vitest 共 **19 项**通过，Vue 类型检查与生产构建通过；服务器 Docker 前端镜像构建成功，仅重建并重启了 `frontend`，`backend` 和 `postgres` 未重启。线上管理页与邮箱页均返回 HTTP 200，管理 setup 状态仍为 `needsSetup=false`、`productionAccepted=false`；浏览器确认五个分组、子菜单和邮箱登录入口已加载。此次只改动控制台导航与说明，没有改邮箱服务、DNS、证书、数据库卷或管理员凭据。`productionAccepted=false` 保持不变。

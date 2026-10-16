@@ -31,4 +31,14 @@ describe('Admin authentication availability states',()=>{
     await wrapper.get('button[type="button"]').trigger('click');await flushPromises();
     expect(wrapper.find('input[autocomplete="username"]').exists()).toBe(true);
   });
+
+  it('provides a separate entry for mailbox users',async()=>{
+    vi.mocked(refreshCsrf).mockResolvedValue(undefined);
+    vi.mocked(api).mockResolvedValueOnce({needsSetup:false}).mockRejectedValueOnce(new ApiFailure('AUTH_REQUIRED','请先登录',401));
+    const wrapper=mount(AuthScreen);await flushPromises();
+    const link=wrapper.get('a.auth-mail-link');
+    expect(link.attributes('href')).toBe('https://mail.astrogate.sbs/');
+    expect(link.attributes('rel')).toContain('noopener');
+    expect(link.text()).toContain('普通邮箱用户登录');
+  });
 });

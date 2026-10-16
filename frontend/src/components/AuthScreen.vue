@@ -59,6 +59,7 @@ async function submit(){
       </form>
       <p v-if="stage==='unavailable'" role="alert" class="notice danger">{{error}}</p>
       <button v-if="stage==='unavailable'" type="button" class="full-width" :disabled="busy" @click="initialize">{{busy?'检查中…':'重新检查连接'}}</button>
+      <a class="auth-mail-link" href="https://mail.astrogate.sbs/" target="_blank" rel="noopener noreferrer">普通邮箱用户登录 →</a>
       <p class="auth-note">使用管理后台账号，不是邮箱账户密码。<br>连接失败时不会切换到演示数据。</p>
     </section>
   </main>

@@ -10,6 +10,8 @@
 
 后台控制面与现有邮件服务使用独立容器和数据库卷；不自动安装、重装或覆盖现有 Postfix/Dovecot/Roundcube。新建节点默认只读，未配置 Agent/SMTP/DNS API 时会显示未配置，不伪造成功。生产初始化令牌和密钥只在服务器现场生成，不放入源码包。管理员使用用户名和密码直接登录；高风险写操作要求近期重新输入管理员密码。密码单因素登录降低账户保护强度，应启用来源 IP 限制。
 
+管理后台入口为 `https://admin.astrogate.sbs/`；普通邮箱用户从 `https://mail.astrogate.sbs/` 登录 Roundcube，使用自己的完整邮箱地址和邮箱密码。邮箱用户凭据与管理员账号完全独立。
+
 技术栈：Java 21 / Spring Boot 3 / Spring Security / Flyway / PostgreSQL 17；Vue 3 / TypeScript / Vite；独立 Python Agent + systemd。PostgreSQL 是唯一管理数据库；Agent 的 SQLite 仅作为本机幂等与重放防护账本，不是第二套控制面数据库。
 
 ## 本地启动入口
